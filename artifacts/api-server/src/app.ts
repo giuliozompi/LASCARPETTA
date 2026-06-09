@@ -3,6 +3,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import pinoHttp from "pino-http";
+import path from "path";
+import { fileURLToPath } from "url";
 import router from "./routes";
 import { logger } from "./lib/logger";
 
@@ -48,5 +50,17 @@ app.use(session({
 }));
 
 app.use("/api", router);
+
+// In production (Node.js deploy without nginx), serve the React frontend
+// and fall back to index.html for SPA routing
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  // Go up two levels: dist/ → api-server/ → artifacts/ → root, then down to lascarpetta
+  const frontendDist = path.resolve(__dirname, "../../lascarpetta/dist/public");
+  app.use(express.static(frontendDist));
+  app.get("*", (_req, res) => {
+    return res.sendFile(path.join(frontendDist, "index.html"));
+  });
+}
 
 export default app;
