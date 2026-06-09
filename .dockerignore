@@ -1,0 +1,10 @@
+node_modules
+**/node_modules
+**/.tsbuildinfo
+**/dist
+.git
+.local
+artifacts/mockup-sandbox
+scripts
+*.log
+.env
