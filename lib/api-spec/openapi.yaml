@@ -3,20 +3,33 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: La Scarpetta Restaurant API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: menu
+    description: Menu categories and dishes
+  - name: gallery
+    description: Photo gallery management
+  - name: events
+    description: Restaurant events
+  - name: reservations
+    description: Table reservations
+  - name: catering
+    description: Catering reservations
+  - name: reviews
+    description: Customer reviews and feedback
+  - name: admin
+    description: Admin CMS operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,13 +37,1291 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  # ──────────────────── MENU ────────────────────
+  /menu/categories:
+    get:
+      operationId: listMenuCategories
+      tags: [menu]
+      summary: List all menu categories
+      parameters:
+        - in: query
+          name: lang
+          schema:
+            type: string
+            default: ru
+      responses:
+        "200":
+          description: List of menu categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MenuCategory"
+    post:
+      operationId: createMenuCategory
+      tags: [admin, menu]
+      summary: Create a menu category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MenuCategoryInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MenuCategory"
+
+  /menu/categories/{id}:
+    put:
+      operationId: updateMenuCategory
+      tags: [admin, menu]
+      summary: Update a menu category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MenuCategoryInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MenuCategory"
+    delete:
+      operationId: deleteMenuCategory
+      tags: [admin, menu]
+      summary: Delete a menu category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /menu/dishes:
+    get:
+      operationId: listDishes
+      tags: [menu]
+      summary: List all dishes, optionally filtered by category
+      parameters:
+        - in: query
+          name: categoryId
+          schema:
+            type: ["integer", "null"]
+        - in: query
+          name: lang
+          schema:
+            type: string
+            default: ru
+        - in: query
+          name: featured
+          schema:
+            type: ["boolean", "null"]
+      responses:
+        "200":
+          description: List of dishes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dish"
+    post:
+      operationId: createDish
+      tags: [admin, menu]
+      summary: Create a dish
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DishInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dish"
+
+  /menu/dishes/{id}:
+    get:
+      operationId: getDish
+      tags: [menu]
+      summary: Get a dish by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Dish
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dish"
+    put:
+      operationId: updateDish
+      tags: [admin, menu]
+      summary: Update a dish
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DishInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dish"
+    delete:
+      operationId: deleteDish
+      tags: [admin, menu]
+      summary: Delete a dish
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /menu/featured:
+    get:
+      operationId: getFeaturedDishes
+      tags: [menu]
+      summary: Get featured/signature dishes for homepage
+      parameters:
+        - in: query
+          name: lang
+          schema:
+            type: string
+            default: ru
+      responses:
+        "200":
+          description: Featured dishes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dish"
+
+  # ──────────────────── GALLERY ────────────────────
+  /gallery:
+    get:
+      operationId: listGalleryPhotos
+      tags: [gallery]
+      summary: List gallery photos
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: ["string", "null"]
+            enum: [dishes, interior, events, daily, null]
+        - in: query
+          name: limit
+          schema:
+            type: ["integer", "null"]
+      responses:
+        "200":
+          description: List of gallery photos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GalleryPhoto"
+    post:
+      operationId: createGalleryPhoto
+      tags: [admin, gallery]
+      summary: Add a gallery photo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GalleryPhotoInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GalleryPhoto"
+
+  /gallery/{id}:
+    put:
+      operationId: updateGalleryPhoto
+      tags: [admin, gallery]
+      summary: Update a gallery photo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GalleryPhotoInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GalleryPhoto"
+    delete:
+      operationId: deleteGalleryPhoto
+      tags: [admin, gallery]
+      summary: Delete a gallery photo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ──────────────────── EVENTS ────────────────────
+  /events:
+    get:
+      operationId: listEvents
+      tags: [events]
+      summary: List events
+      parameters:
+        - in: query
+          name: upcoming
+          schema:
+            type: ["boolean", "null"]
+        - in: query
+          name: lang
+          schema:
+            type: string
+            default: ru
+      responses:
+        "200":
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+    post:
+      operationId: createEvent
+      tags: [admin, events]
+      summary: Create an event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+
+  /events/{id}:
+    get:
+      operationId: getEvent
+      tags: [events]
+      summary: Get event by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Event
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+    put:
+      operationId: updateEvent
+      tags: [admin, events]
+      summary: Update an event
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+    delete:
+      operationId: deleteEvent
+      tags: [admin, events]
+      summary: Delete an event
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ──────────────────── TABLE RESERVATIONS ────────────────────
+  /reservations:
+    get:
+      operationId: listReservations
+      tags: [admin, reservations]
+      summary: List all table reservations (admin)
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: ["string", "null"]
+            enum: [pending, confirmed, cancelled, completed, null]
+        - in: query
+          name: date
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: List of reservations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reservation"
+    post:
+      operationId: createReservation
+      tags: [reservations]
+      summary: Submit a table reservation request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReservationInput"
+      responses:
+        "201":
+          description: Reservation submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+
+  /reservations/{id}:
+    get:
+      operationId: getReservation
+      tags: [admin, reservations]
+      summary: Get reservation by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Reservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+    patch:
+      operationId: updateReservationStatus
+      tags: [admin, reservations]
+      summary: Update reservation status (admin)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReservationStatusUpdate"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+
+  /reservations/stats:
+    get:
+      operationId: getReservationStats
+      tags: [admin, reservations]
+      summary: Get reservation statistics for dashboard
+      responses:
+        "200":
+          description: Reservation stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReservationStats"
+
+  # ──────────────────── CATERING ────────────────────
+  /catering/menus:
+    get:
+      operationId: listCateringMenus
+      tags: [catering]
+      summary: List catering menu packages
+      parameters:
+        - in: query
+          name: lang
+          schema:
+            type: string
+            default: ru
+      responses:
+        "200":
+          description: Catering menus
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CateringMenu"
+    post:
+      operationId: createCateringMenu
+      tags: [admin, catering]
+      summary: Create a catering menu package
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CateringMenuInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CateringMenu"
+
+  /catering/menus/{id}:
+    put:
+      operationId: updateCateringMenu
+      tags: [admin, catering]
+      summary: Update a catering menu
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CateringMenuInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CateringMenu"
+    delete:
+      operationId: deleteCateringMenu
+      tags: [admin, catering]
+      summary: Delete a catering menu
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /catering/bookings:
+    get:
+      operationId: listCateringBookings
+      tags: [admin, catering]
+      summary: List catering bookings (admin)
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: ["string", "null"]
+            enum: [pending, confirmed, cancelled, null]
+      responses:
+        "200":
+          description: List of catering bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CateringBooking"
+    post:
+      operationId: createCateringBooking
+      tags: [catering]
+      summary: Submit a catering booking request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CateringBookingInput"
+      responses:
+        "201":
+          description: Booking submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CateringBooking"
+
+  /catering/bookings/{id}:
+    patch:
+      operationId: updateCateringBookingStatus
+      tags: [admin, catering]
+      summary: Update catering booking status (admin)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CateringStatusUpdate"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CateringBooking"
+
+  # ──────────────────── REVIEWS ────────────────────
+  /reviews:
+    get:
+      operationId: listReviews
+      tags: [reviews]
+      summary: List approved reviews
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: ["integer", "null"]
+        - in: query
+          name: approved
+          schema:
+            type: ["boolean", "null"]
+      responses:
+        "200":
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
+    post:
+      operationId: createReview
+      tags: [reviews]
+      summary: Submit a customer review
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewInput"
+      responses:
+        "201":
+          description: Review submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+
+  /reviews/{id}/approve:
+    patch:
+      operationId: approveReview
+      tags: [admin, reviews]
+      summary: Approve or reject a review (admin)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewApproval"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+
+  /reviews/stats:
+    get:
+      operationId: getReviewStats
+      tags: [reviews]
+      summary: Get review statistics (average rating, count)
+      responses:
+        "200":
+          description: Review stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewStats"
+
+  # ──────────────────── ADMIN AUTH ────────────────────
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginInput"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Invalid credentials
+
+  /admin/logout:
+    post:
+      operationId: adminLogout
+      tags: [admin]
+      summary: Admin logout
+      responses:
+        "200":
+          description: Logged out
+
+  /admin/me:
+    get:
+      operationId: getAdminMe
+      tags: [admin]
+      summary: Get current admin session
+      responses:
+        "200":
+          description: Admin session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Not authenticated
+
 components:
   schemas:
     HealthStatus:
       type: object
+      required: [status]
       properties:
         status:
           type: string
-      required:
-        - status
 
+    # ── Menu ──
+    MenuCategory:
+      type: object
+      required: [id, slug, nameRu, nameIt, nameEn, nameFr, nameZh, sortOrder]
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        nameRu:
+          type: string
+        nameIt:
+          type: string
+        nameEn:
+          type: string
+        nameFr:
+          type: string
+        nameZh:
+          type: string
+        sortOrder:
+          type: integer
+
+    MenuCategoryInput:
+      type: object
+      required: [slug, nameRu, nameIt, nameEn, nameFr, nameZh]
+      properties:
+        slug:
+          type: string
+        nameRu:
+          type: string
+        nameIt:
+          type: string
+        nameEn:
+          type: string
+        nameFr:
+          type: string
+        nameZh:
+          type: string
+        sortOrder:
+          type: integer
+
+    Dish:
+      type: object
+      required: [id, categoryId, nameRu, nameIt, nameEn, nameFr, nameZh, descRu, descIt, descEn, descFr, descZh, price, currency, imageUrl, featured, available]
+      properties:
+        id:
+          type: integer
+        categoryId:
+          type: integer
+        nameRu:
+          type: string
+        nameIt:
+          type: string
+        nameEn:
+          type: string
+        nameFr:
+          type: string
+        nameZh:
+          type: string
+        descRu:
+          type: string
+        descIt:
+          type: string
+        descEn:
+          type: string
+        descFr:
+          type: string
+        descZh:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        featured:
+          type: boolean
+        available:
+          type: boolean
+        allergens:
+          type: ["string", "null"]
+
+    DishInput:
+      type: object
+      required: [categoryId, nameRu, nameIt, nameEn, nameFr, nameZh, descRu, descIt, descEn, descFr, descZh, price]
+      properties:
+        categoryId:
+          type: integer
+        nameRu:
+          type: string
+        nameIt:
+          type: string
+        nameEn:
+          type: string
+        nameFr:
+          type: string
+        nameZh:
+          type: string
+        descRu:
+          type: string
+        descIt:
+          type: string
+        descEn:
+          type: string
+        descFr:
+          type: string
+        descZh:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        featured:
+          type: boolean
+        available:
+          type: boolean
+        allergens:
+          type: ["string", "null"]
+
+    # ── Gallery ──
+    GalleryPhoto:
+      type: object
+      required: [id, type, imageUrl, captionRu, captionIt, captionEn, sortOrder, featured]
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum: [dishes, interior, events, daily]
+        imageUrl:
+          type: string
+        thumbnailUrl:
+          type: ["string", "null"]
+        captionRu:
+          type: string
+        captionIt:
+          type: string
+        captionEn:
+          type: string
+        sortOrder:
+          type: integer
+        featured:
+          type: boolean
+        createdAt:
+          type: string
+
+    GalleryPhotoInput:
+      type: object
+      required: [type, imageUrl]
+      properties:
+        type:
+          type: string
+          enum: [dishes, interior, events, daily]
+        imageUrl:
+          type: string
+        thumbnailUrl:
+          type: ["string", "null"]
+        captionRu:
+          type: string
+        captionIt:
+          type: string
+        captionEn:
+          type: string
+        sortOrder:
+          type: integer
+        featured:
+          type: boolean
+
+    # ── Events ──
+    Event:
+      type: object
+      required: [id, titleRu, titleIt, titleEn, titleFr, titleZh, descRu, descIt, descEn, descFr, descZh, date, imageUrl]
+      properties:
+        id:
+          type: integer
+        titleRu:
+          type: string
+        titleIt:
+          type: string
+        titleEn:
+          type: string
+        titleFr:
+          type: string
+        titleZh:
+          type: string
+        descRu:
+          type: string
+        descIt:
+          type: string
+        descEn:
+          type: string
+        descFr:
+          type: string
+        descZh:
+          type: string
+        date:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        published:
+          type: boolean
+
+    EventInput:
+      type: object
+      required: [titleRu, titleIt, titleEn, titleFr, titleZh, descRu, descIt, descEn, descFr, descZh, date]
+      properties:
+        titleRu:
+          type: string
+        titleIt:
+          type: string
+        titleEn:
+          type: string
+        titleFr:
+          type: string
+        titleZh:
+          type: string
+        descRu:
+          type: string
+        descIt:
+          type: string
+        descEn:
+          type: string
+        descFr:
+          type: string
+        descZh:
+          type: string
+        date:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        published:
+          type: boolean
+
+    # ── Reservations ──
+    Reservation:
+      type: object
+      required: [id, name, phone, date, time, guests, status, lang, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: ["string", "null"]
+        date:
+          type: string
+        time:
+          type: string
+        guests:
+          type: integer
+        status:
+          type: string
+          enum: [pending, confirmed, cancelled, completed]
+        comment:
+          type: ["string", "null"]
+        lang:
+          type: string
+        adminNotes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+
+    ReservationInput:
+      type: object
+      required: [name, phone, date, time, guests]
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: ["string", "null"]
+        date:
+          type: string
+        time:
+          type: string
+        guests:
+          type: integer
+        comment:
+          type: ["string", "null"]
+        lang:
+          type: string
+
+    ReservationStatusUpdate:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [pending, confirmed, cancelled, completed]
+        adminNotes:
+          type: ["string", "null"]
+
+    ReservationStats:
+      type: object
+      required: [total, pending, confirmed, todayCount, thisWeekCount]
+      properties:
+        total:
+          type: integer
+        pending:
+          type: integer
+        confirmed:
+          type: integer
+        todayCount:
+          type: integer
+        thisWeekCount:
+          type: integer
+
+    # ── Catering ──
+    CateringMenu:
+      type: object
+      required: [id, nameRu, nameIt, nameEn, nameFr, nameZh, descRu, descIt, descEn, descFr, descZh, pricePerPerson, minGuests, maxGuests, active]
+      properties:
+        id:
+          type: integer
+        nameRu:
+          type: string
+        nameIt:
+          type: string
+        nameEn:
+          type: string
+        nameFr:
+          type: string
+        nameZh:
+          type: string
+        descRu:
+          type: string
+        descIt:
+          type: string
+        descEn:
+          type: string
+        descFr:
+          type: string
+        descZh:
+          type: string
+        pricePerPerson:
+          type: number
+        minGuests:
+          type: integer
+        maxGuests:
+          type: integer
+        imageUrl:
+          type: ["string", "null"]
+        active:
+          type: boolean
+
+    CateringMenuInput:
+      type: object
+      required: [nameRu, nameIt, nameEn, nameFr, nameZh, descRu, descIt, descEn, descFr, descZh, pricePerPerson, minGuests, maxGuests]
+      properties:
+        nameRu:
+          type: string
+        nameIt:
+          type: string
+        nameEn:
+          type: string
+        nameFr:
+          type: string
+        nameZh:
+          type: string
+        descRu:
+          type: string
+        descIt:
+          type: string
+        descEn:
+          type: string
+        descFr:
+          type: string
+        descZh:
+          type: string
+        pricePerPerson:
+          type: number
+        minGuests:
+          type: integer
+        maxGuests:
+          type: integer
+        imageUrl:
+          type: ["string", "null"]
+        active:
+          type: boolean
+
+    CateringBooking:
+      type: object
+      required: [id, name, phone, eventDate, guests, cateringMenuId, status, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: ["string", "null"]
+        eventDate:
+          type: string
+        eventLocation:
+          type: ["string", "null"]
+        guests:
+          type: integer
+        cateringMenuId:
+          type: integer
+        status:
+          type: string
+          enum: [pending, confirmed, cancelled]
+        comment:
+          type: ["string", "null"]
+        adminNotes:
+          type: ["string", "null"]
+        lang:
+          type: string
+        createdAt:
+          type: string
+
+    CateringBookingInput:
+      type: object
+      required: [name, phone, eventDate, guests, cateringMenuId]
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: ["string", "null"]
+        eventDate:
+          type: string
+        eventLocation:
+          type: ["string", "null"]
+        guests:
+          type: integer
+        cateringMenuId:
+          type: integer
+        comment:
+          type: ["string", "null"]
+        lang:
+          type: string
+
+    CateringStatusUpdate:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [pending, confirmed, cancelled]
+        adminNotes:
+          type: ["string", "null"]
+
+    # ── Reviews ──
+    Review:
+      type: object
+      required: [id, authorName, rating, text, lang, approved, createdAt]
+      properties:
+        id:
+          type: integer
+        authorName:
+          type: string
+        rating:
+          type: integer
+        text:
+          type: string
+        lang:
+          type: string
+        source:
+          type: ["string", "null"]
+        approved:
+          type: boolean
+        createdAt:
+          type: string
+
+    ReviewInput:
+      type: object
+      required: [authorName, rating, text]
+      properties:
+        authorName:
+          type: string
+        rating:
+          type: integer
+        text:
+          type: string
+        lang:
+          type: string
+        source:
+          type: ["string", "null"]
+
+    ReviewApproval:
+      type: object
+      required: [approved]
+      properties:
+        approved:
+          type: boolean
+
+    ReviewStats:
+      type: object
+      required: [averageRating, totalCount, approvedCount]
+      properties:
+        averageRating:
+          type: number
+        totalCount:
+          type: integer
+        approvedCount:
+          type: integer
+        ratingBreakdown:
+          type: object
+          properties:
+            "1":
+              type: integer
+            "2":
+              type: integer
+            "3":
+              type: integer
+            "4":
+              type: integer
+            "5":
+              type: integer
+
+    # ── Admin Auth ──
+    AdminLoginInput:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    AdminSession:
+      type: object
+      required: [authenticated, username]
+      properties:
+        authenticated:
+          type: boolean
+        username:
+          type: string

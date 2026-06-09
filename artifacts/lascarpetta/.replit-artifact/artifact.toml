@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "La Scarpetta"
+version = "1.0.0"
+id = "artifacts/lascarpetta"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18315
+
+[services.development]
+run = "pnpm --filter @workspace/lascarpetta run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lascarpetta", "run", "build" ]
+publicDir = "artifacts/lascarpetta/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18315"
+BASE_PATH = "/"

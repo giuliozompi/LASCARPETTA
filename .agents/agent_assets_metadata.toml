@@ -1,0 +1,32 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "NBfqguD-dCZPJN7VpRzUY"
+uri = "file://artifacts/lascarpetta/public/hero-bg.png"
+type = "image"
+title = "Italian trattoria interior"
+
+[[generated]]
+id = "xndJSm51DSq-tYpj1bB4Q"
+uri = "file://artifacts/lascarpetta/public/chef-marco.png"
+type = "image"
+title = "Chef Marco Iachetta"
+
+[[generated]]
+id = "fI2aXq346ahtOOMuVHFod"
+uri = "file://artifacts/lascarpetta/public/chef-giulio.png"
+type = "image"
+title = "Chef Don Giulio"
+
+[[generated]]
+id = "m2SVhwMwvB5yTfwolJbtq"
+uri = "file://artifacts/lascarpetta/public/dish-carbonara.png"
+type = "image"
+title = "Carbonara pasta"
+
+[[generated]]
+id = "iI-MSwyhKTDgtJKu10_O-"
+uri = "file://artifacts/lascarpetta/public/catering.png"
+type = "image"
+title = "Catering spread"
