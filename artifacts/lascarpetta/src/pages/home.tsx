@@ -64,12 +64,9 @@ export default function Home() {
       {/* About Section */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h2 className="font-serif text-4xl text-primary mb-8">La Nostra Storia</h2>
+          <h2 className="font-serif text-4xl text-primary mb-8">{t("home.about.title")}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            La Scarpetta is a warm, family-run Italian trattoria in the heart of Moscow. 
-            We are not a luxury restaurant, but a place where real Italian cooking meets genuine hospitality. 
-            Guests come here to taste carbonara the way it was meant to be made, sip honest Italian wine, 
-            and feel transported to an Italian kitchen. It's intimate, lived-in, and deeply authentic.
+            {t("home.about.text")}
           </p>
         </div>
       </section>
@@ -77,7 +74,7 @@ export default function Home() {
       {/* Featured Dishes */}
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-4">
-          <h2 className="font-serif text-4xl text-primary mb-12 text-center">Specials</h2>
+          <h2 className="font-serif text-4xl text-primary mb-12 text-center">{t("home.specials.title")}</h2>
           
           {isLoadingDishes ? (
             <div className="text-center">{t("common.loading")}</div>
@@ -104,7 +101,7 @@ export default function Home() {
           <div className="text-center mt-12">
             <Link href="/menu">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white rounded-none">
-                View Full Menu
+                {t("home.specials.cta")}
               </Button>
             </Link>
           </div>
@@ -122,11 +119,10 @@ export default function Home() {
             <div>
               <h2 className="font-serif text-4xl text-primary mb-6">Marco & Giulio</h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Managed by Italian owners with head chef Marco Iachetta (from Fabriano, Italy, in Moscow since 2002) 
-                and Don Giulio. We bring the true taste of Italy to Moscow.
+                {t("home.chef.text")}
               </p>
               <Link href="/chef">
-                <Button variant="link" className="text-primary p-0 text-lg">Read Our Story &rarr;</Button>
+                <Button variant="link" className="text-primary p-0 text-lg">{t("home.chef.cta")} &rarr;</Button>
               </Link>
             </div>
           </div>
