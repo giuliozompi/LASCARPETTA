@@ -1,0 +1,45 @@
+services:
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lascarpetta
+      POSTGRES_USER: lascarpetta
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lascarpetta"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api-runner
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://lascarpetta:${DB_PASSWORD}@db:5432/lascarpetta
+      SESSION_SECRET: ${SESSION_SECRET}
+      NODE_ENV: production
+      PORT: "5000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web-runner
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
