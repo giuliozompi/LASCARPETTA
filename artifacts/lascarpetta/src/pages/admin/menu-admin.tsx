@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Trash2, Plus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
+import { AutoTranslateButton } from "@/components/auto-translate-button";
 
 export default function AdminMenu() {
   const { data: me } = useGetAdminMe();
@@ -31,37 +32,42 @@ export default function AdminMenu() {
   if (activeCatId) params.categoryId = activeCatId;
   const { data: dishes } = useListDishes(params);
 
-  const { register, handleSubmit, setValue, reset } = useForm({
-    defaultValues: { categoryId: 0, nameRu: "", nameIt: "", nameEn: "", nameFr: "", nameZh: "", descRu: "", descIt: "", descEn: "", descFr: "", descZh: "", price: 0, currency: "RUB", imageUrl: "", featured: false, available: true, allergens: "" },
+  const { register, handleSubmit, setValue, getValues, reset } = useForm({
+    defaultValues: {
+      categoryId: 0,
+      nameRu: "", nameIt: "", nameEn: "", nameFr: "", nameZh: "",
+      descRu: "", descIt: "", descEn: "", descFr: "", descZh: "",
+      price: 0, currency: "RUB", imageUrl: "", featured: false, available: true, allergens: "",
+    },
   });
 
   const onSubmit = async (data: any) => {
     try {
       await createDish.mutateAsync({ data: { ...data, price: Number(data.price) } });
       qc.invalidateQueries({ queryKey: getListDishesQueryKey(params) });
-      toast({ title: "Dish added" });
+      toast({ title: "Блюдо добавлено" });
       reset();
       setShowForm(false);
     } catch {
-      toast({ title: "Error", variant: "destructive" });
+      toast({ title: "Ошибка", variant: "destructive" });
     }
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Delete this dish?")) return;
+    if (!confirm("Удалить блюдо?")) return;
     await deleteDish.mutateAsync({ id });
     qc.invalidateQueries({ queryKey: getListDishesQueryKey(params) });
-    toast({ title: "Dish deleted" });
+    toast({ title: "Блюдо удалено" });
   };
 
   return (
     <AdminLayout>
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="font-serif text-3xl">Menu</h1>
+          <h1 className="font-serif text-3xl">Меню</h1>
           <Button className="rounded-none" onClick={() => setShowForm(!showForm)}>
             <Plus className="w-4 h-4 mr-2" />
-            Add Dish
+            Добавить блюдо
           </Button>
         </div>
 
@@ -71,7 +77,7 @@ export default function AdminMenu() {
             onClick={() => setActiveCatId(null)}
             className={`px-4 py-1.5 text-sm rounded-none border whitespace-nowrap ${activeCatId === null ? "bg-primary text-white border-primary" : "border-border"}`}
           >
-            All
+            Все
           </button>
           {categories?.map(c => (
             <button
@@ -79,69 +85,111 @@ export default function AdminMenu() {
               onClick={() => setActiveCatId(c.id)}
               className={`px-4 py-1.5 text-sm rounded-none border whitespace-nowrap ${activeCatId === c.id ? "bg-primary text-white border-primary" : "border-border"}`}
             >
-              {c.nameEn}
+              {c.nameRu}
             </button>
           ))}
         </div>
 
         {showForm && (
           <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-border p-6 mb-6 space-y-4">
+
+            {/* Category + Price */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Category *</label>
+                <label className="block text-sm font-medium mb-1">Категория *</label>
                 <Select onValueChange={(v) => setValue("categoryId", Number(v))}>
                   <SelectTrigger className="rounded-none">
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder="Выбрать категорию" />
                   </SelectTrigger>
                   <SelectContent>
-                    {categories?.map(c => <SelectItem key={c.id} value={String(c.id)}>{c.nameEn}</SelectItem>)}
+                    {categories?.map(c => <SelectItem key={c.id} value={String(c.id)}>{c.nameRu}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Price (RUB) *</label>
+                <label className="block text-sm font-medium mb-1">Цена (RUB) *</label>
                 <Input {...register("price")} type="number" className="rounded-none" />
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+            {/* RU name + desc (source) */}
+            <div className="border border-primary/20 bg-primary/5 p-4 space-y-3">
+              <p className="text-xs font-semibold text-primary uppercase tracking-wide">🇷🇺 Оригинал (Русский)</p>
               <div>
-                <label className="block text-sm font-medium mb-1">Name RU *</label>
-                <Input {...register("nameRu")} className="rounded-none" />
+                <label className="block text-sm font-medium mb-1">Название RU *</label>
+                <Input {...register("nameRu")} className="rounded-none" placeholder="Брускетта с томатами" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Name IT *</label>
-                <Input {...register("nameIt")} className="rounded-none" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Name EN *</label>
-                <Input {...register("nameEn")} className="rounded-none" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Name FR</label>
-                <Input {...register("nameFr")} className="rounded-none" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Name ZH</label>
-                <Input {...register("nameZh")} className="rounded-none" />
+                <label className="block text-sm font-medium mb-1">Описание RU</label>
+                <Textarea {...register("descRu")} rows={2} className="rounded-none" placeholder="Хрустящий хлеб с томатами..." />
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Description RU</label>
-                <Textarea {...register("descRu")} rows={2} className="rounded-none" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Description EN</label>
-                <Textarea {...register("descEn")} rows={2} className="rounded-none" />
-              </div>
+
+            {/* Auto-translate button */}
+            <div className="flex items-center gap-3">
+              <AutoTranslateButton
+                getTexts={() => ({ name: getValues("nameRu"), desc: getValues("descRu") })}
+                onTranslated={(lang, vals) => {
+                  if (vals.name !== undefined) setValue(`name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as any, vals.name);
+                  if (vals.desc !== undefined) setValue(`desc${lang.charAt(0).toUpperCase() + lang.slice(1)}` as any, vals.desc);
+                }}
+              />
+              <span className="text-xs text-muted-foreground">Заполнит автоматически IT, EN, FR, ZH</span>
             </div>
+
+            {/* Translated names */}
             <div>
-              <label className="block text-sm font-medium mb-1">Image URL</label>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Названия (редактируемые)</p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇮🇹 IT</label>
+                  <Input {...register("nameIt")} className="rounded-none" />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇬🇧 EN</label>
+                  <Input {...register("nameEn")} className="rounded-none" />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇫🇷 FR</label>
+                  <Input {...register("nameFr")} className="rounded-none" />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇨🇳 ZH</label>
+                  <Input {...register("nameZh")} className="rounded-none" />
+                </div>
+              </div>
+            </div>
+
+            {/* Translated descriptions */}
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Описания (редактируемые)</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇮🇹 IT</label>
+                  <Textarea {...register("descIt")} rows={2} className="rounded-none" />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇬🇧 EN</label>
+                  <Textarea {...register("descEn")} rows={2} className="rounded-none" />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇫🇷 FR</label>
+                  <Textarea {...register("descFr")} rows={2} className="rounded-none" />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium mb-1">🇨🇳 ZH</label>
+                  <Textarea {...register("descZh")} rows={2} className="rounded-none" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">URL фотографии</label>
               <Input {...register("imageUrl")} className="rounded-none" placeholder="https://..." />
             </div>
             <div className="flex gap-2">
-              <Button type="submit" className="rounded-none" disabled={createDish.isPending}>Add Dish</Button>
-              <Button type="button" variant="outline" className="rounded-none" onClick={() => setShowForm(false)}>Cancel</Button>
+              <Button type="submit" className="rounded-none" disabled={createDish.isPending}>Добавить</Button>
+              <Button type="button" variant="outline" className="rounded-none" onClick={() => { reset(); setShowForm(false); }}>Отмена</Button>
             </div>
           </form>
         )}
@@ -150,19 +198,19 @@ export default function AdminMenu() {
           <table className="w-full text-sm">
             <thead className="border-b border-border bg-muted/50">
               <tr>
-                <th className="text-left p-3 font-medium">Photo</th>
-                <th className="text-left p-3 font-medium">Name</th>
-                <th className="text-left p-3 font-medium">Price</th>
-                <th className="text-left p-3 font-medium">Featured</th>
-                <th className="text-left p-3 font-medium">Available</th>
-                <th className="text-left p-3 font-medium">Actions</th>
+                <th className="text-left p-3 font-medium">Фото</th>
+                <th className="text-left p-3 font-medium">Название</th>
+                <th className="text-left p-3 font-medium">Цена</th>
+                <th className="text-left p-3 font-medium">Топ</th>
+                <th className="text-left p-3 font-medium">Доступно</th>
+                <th className="text-left p-3 font-medium"></th>
               </tr>
             </thead>
             <tbody>
               {dishes?.map(d => (
                 <tr key={d.id} className="border-b border-border hover:bg-muted/20">
                   <td className="p-3">
-                    {d.imageUrl ? <img src={d.imageUrl} alt={d.nameEn} className="w-12 h-12 object-cover" /> : <div className="w-12 h-12 bg-muted" />}
+                    {d.imageUrl ? <img src={d.imageUrl} alt={d.nameRu} className="w-12 h-12 object-cover" /> : <div className="w-12 h-12 bg-muted" />}
                   </td>
                   <td className="p-3">
                     <p className="font-medium">{d.nameRu}</p>
@@ -180,7 +228,7 @@ export default function AdminMenu() {
               ))}
             </tbody>
           </table>
-          {dishes?.length === 0 && <p className="text-center py-12 text-muted-foreground">No dishes found</p>}
+          {dishes?.length === 0 && <p className="text-center py-12 text-muted-foreground">Нет блюд</p>}
         </div>
       </div>
     </AdminLayout>

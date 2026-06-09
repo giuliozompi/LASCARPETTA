@@ -7,6 +7,7 @@ import reservationsRouter from "./reservations";
 import cateringRouter from "./catering";
 import reviewsRouter from "./reviews";
 import adminRouter from "./admin";
+import translateRouter from "./translate";
 
 const router: IRouter = Router();
 
@@ -18,5 +19,6 @@ router.use(reservationsRouter);
 router.use(cateringRouter);
 router.use(reviewsRouter);
 router.use(adminRouter);
+router.use(translateRouter);
 
 export default router;
