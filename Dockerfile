@@ -4,11 +4,18 @@ FROM node:24-alpine AS frontend-builder
 WORKDIR /app
 RUN npm install -g pnpm
 
+# Copy workspace root files
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY tsconfig.base.json tsconfig.json ./
+
+# Copy all lib packages (needed for typecheck + imports)
 COPY lib/ ./lib/
+
+# Copy the frontend artifact and a stub for every other workspace package
+# so pnpm can resolve the full workspace graph during install
 COPY artifacts/lascarpetta/ ./artifacts/lascarpetta/
 COPY artifacts/api-server/package.json ./artifacts/api-server/
+COPY scripts/package.json ./scripts/
 
 RUN pnpm install --frozen-lockfile
 RUN pnpm run typecheck:libs
@@ -24,6 +31,8 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY tsconfig.base.json tsconfig.json ./
 COPY lib/ ./lib/
 COPY artifacts/api-server/ ./artifacts/api-server/
+COPY artifacts/lascarpetta/package.json ./artifacts/lascarpetta/
+COPY scripts/package.json ./scripts/
 
 RUN pnpm install --frozen-lockfile
 RUN pnpm run typecheck:libs
@@ -36,8 +45,15 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY lib/db/package.json ./lib/db/
+COPY lib/api-spec/package.json ./lib/api-spec/
+COPY lib/api-zod/package.json ./lib/api-zod/
+COPY lib/api-client-react/package.json ./lib/api-client-react/
 COPY artifacts/api-server/package.json ./artifacts/api-server/
-RUN pnpm install --prod --filter @workspace/api-server
+COPY artifacts/lascarpetta/package.json ./artifacts/lascarpetta/
+COPY scripts/package.json ./scripts/
+
+RUN pnpm install --prod --filter @workspace/api-server --filter @workspace/db
 
 COPY --from=api-builder /app/artifacts/api-server/dist ./artifacts/api-server/dist
 
@@ -45,7 +61,7 @@ ENV NODE_ENV=production
 ENV PORT=5000
 EXPOSE 5000
 
-CMD ["node", "artifacts/api-server/dist/index.js"]
+CMD ["node", "artifacts/api-server/dist/index.mjs"]
 
 # ─── Stage 4: Nginx + frontend (used by docker-compose `web` service) ────────
 FROM nginx:alpine AS web-runner
@@ -65,8 +81,15 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY lib/db/package.json ./lib/db/
+COPY lib/api-spec/package.json ./lib/api-spec/
+COPY lib/api-zod/package.json ./lib/api-zod/
+COPY lib/api-client-react/package.json ./lib/api-client-react/
 COPY artifacts/api-server/package.json ./artifacts/api-server/
-RUN pnpm install --prod --filter @workspace/api-server
+COPY artifacts/lascarpetta/package.json ./artifacts/lascarpetta/
+COPY scripts/package.json ./scripts/
+
+RUN pnpm install --prod --filter @workspace/api-server --filter @workspace/db
 
 COPY --from=api-builder /app/artifacts/api-server/dist ./artifacts/api-server/dist
 COPY --from=frontend-builder /app/artifacts/lascarpetta/dist /usr/share/nginx/html
