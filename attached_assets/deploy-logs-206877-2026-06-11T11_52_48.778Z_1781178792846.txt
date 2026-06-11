@@ -1,0 +1,587 @@
+13:46:19 | INFO | Build started
+13:46:19 | DEBUG | #1 [internal] load build definition from Dockerfile
+13:46:19 | DEBUG | #1 DONE 0.0s
+13:46:19 | DEBUG | #2 [internal] load metadata for docker.io/library/node:24-slim
+13:46:19 | DEBUG | #1 transferring dockerfile: 1.64kB done
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | #1 WARN: Empty continuation line found in: RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends     curl     && rm -rf /var/lib/apt/lists/*
+13:46:19 | DEBUG |   git switch -c <new-branch-name>
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG |   git switch -
+13:46:19 | DEBUG | If you want to create a new branch to retain commits you create, you may
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | HEAD is now at 0019213 Add pnpm build configuration to package.json
+13:46:19 | DEBUG | Cloning into '/workspace'...
+13:46:19 | DEBUG | Turn off this advice by setting config variable advice.detachedHead to false
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | do so (now or later) by using -c with the switch command. Example:
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | state without impacting any branches by switching back to a branch.
+13:46:19 | DEBUG | Note: switching to '0019213e4fe08ed11b94e05940016df11131ee97'.
+13:46:19 | DEBUG | changes and commit them, and you can discard any commits you make in this
+13:46:19 | DEBUG | You are in 'detached HEAD' state. You can look around, make experimental
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | Or undo this operation with:
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | #2 DONE 0.3s
+13:46:19 | DEBUG | #4 transferring context: 141B done
+13:46:19 | DEBUG | #3 [1/7] FROM docker.io/library/node:24-slim@sha256:2c87ef9bd3c6a3bd4b472b4bec2ce9d16354b0c574f736c476489d09f560a203
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | #4 [internal] load .dockerignore
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | #5 [internal] load build context
+13:46:19 | DEBUG | #4 DONE 0.0s
+13:46:19 | DEBUG | #3 resolve docker.io/library/node:24-slim@sha256:2c87ef9bd3c6a3bd4b472b4bec2ce9d16354b0c574f736c476489d09f560a203 done
+13:46:19 | DEBUG | #3 CACHED
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | #5 transferring context: 9.66MB 0.1s done
+13:46:19 | DEBUG | #5 DONE 0.2s
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | #6 [ 2/11] RUN corepack enable
+13:46:19 | DEBUG | #7 [ 3/11] RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends     curl     && rm -rf /var/lib/apt/lists/*
+13:46:19 | DEBUG | #6 DONE 0.2s
+13:46:19 | DEBUG | 
+13:46:19 | DEBUG | #7 0.159 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+13:46:19 | DEBUG | #7 0.299 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+13:46:19 | DEBUG | #7 0.399 Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+13:46:19 | DEBUG | #7 0.349 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+13:46:20 | DEBUG | #7 0.716 Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+13:46:20 | DEBUG | #7 0.716 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [310 kB]
+13:46:21 | DEBUG | #7 1.743 Fetched 9362 kB in 2s (5581 kB/s)
+13:46:21 | DEBUG | #7 1.743 Reading package lists...
+13:46:22 | DEBUG | #7 2.341 Reading package lists...
+13:46:22 | DEBUG | #7 3.179 Reading state information...
+13:46:22 | DEBUG | #7 2.998 Building dependency tree...
+13:46:22 | DEBUG | #7 3.319   libbrotli1 libcurl4 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3
+13:46:22 | DEBUG | #7 3.319 The following additional packages will be installed:
+13:46:22 | DEBUG | #7 3.320 Recommended packages:
+13:46:22 | DEBUG | #7 3.320   ca-certificates krb5-locales libldap-common publicsuffix libsasl2-modules
+13:46:22 | DEBUG | #7 3.398 The following NEW packages will be installed:
+13:46:22 | DEBUG | #7 3.319   libkrb5support0 libldap-2.5-0 libnghttp2-14 libpsl5 librtmp1 libsasl2-2
+13:46:22 | DEBUG | #7 3.320 Suggested packages:
+13:46:22 | DEBUG | #7 3.320   krb5-doc krb5-user
+13:46:22 | DEBUG | #7 3.319   libsasl2-modules-db libssh2-1 libssl3
+13:46:22 | DEBUG | #7 3.398   curl libbrotli1 libcurl4 libgssapi-krb5-2 libk5crypto3 libkeyutils1
+13:46:22 | DEBUG | #7 3.481 0 upgraded, 16 newly installed, 0 to remove and 0 not upgraded.
+13:46:22 | DEBUG | #7 3.398   libkrb5-3 libkrb5support0 libldap-2.5-0 libnghttp2-14 libpsl5 librtmp1
+13:46:22 | DEBUG | #7 3.481 After this operation, 12.0 MB of additional disk space will be used.
+13:46:22 | DEBUG | #7 3.481 Get:1 http://deb.debian.org/debian bookworm/main amd64 libbrotli1 amd64 1.0.9-2+b6 [275 kB]
+13:46:22 | DEBUG | #7 3.399   libsasl2-2 libsasl2-modules-db libssh2-1 libssl3
+13:46:22 | DEBUG | #7 3.481 Need to get 4242 kB of archives.
+13:46:23 | DEBUG | #7 3.611 Get:2 http://deb.debian.org/debian-security bookworm-security/main amd64 libkrb5support0 amd64 1.20.1-2+deb12u5 [33.2 kB]
+13:46:23 | DEBUG | #7 3.617 Get:5 http://deb.debian.org/debian-security bookworm-security/main amd64 libssl3 amd64 3.0.20-1~deb12u2 [2036 kB]
+13:46:23 | DEBUG | #7 3.617 Get:4 http://deb.debian.org/debian bookworm/main amd64 libkeyutils1 amd64 1.6.3-2 [8808 B]
+13:46:23 | DEBUG | #7 3.612 Get:3 http://deb.debian.org/debian-security bookworm-security/main amd64 libk5crypto3 amd64 1.20.1-2+deb12u5 [79.7 kB]
+13:46:23 | DEBUG | #7 3.695 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 libkrb5-3 amd64 1.20.1-2+deb12u5 [332 kB]
+13:46:23 | DEBUG | #7 3.712 Get:8 http://deb.debian.org/debian bookworm/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg-10 [20.3 kB]
+13:46:23 | DEBUG | #7 3.710 Get:7 http://deb.debian.org/debian-security bookworm-security/main amd64 libgssapi-krb5-2 amd64 1.20.1-2+deb12u5 [135 kB]
+13:46:23 | DEBUG | #7 3.729 Get:15 http://deb.debian.org/debian bookworm/main amd64 libcurl4 amd64 7.88.1-10+deb12u14 [392 kB]
+13:46:23 | DEBUG | #7 3.716 Get:14 http://deb.debian.org/debian bookworm/main amd64 libssh2-1 amd64 1.10.0-3+b1 [179 kB]
+13:46:23 | DEBUG | #7 3.879 debconf: delaying package configuration, since apt-utils is not installed
+13:46:23 | DEBUG | #7 3.760 Get:16 http://deb.debian.org/debian bookworm/main amd64 curl amd64 7.88.1-10+deb12u14 [316 kB]
+13:46:23 | DEBUG | #7 3.716 Get:13 http://deb.debian.org/debian bookworm/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2+b2 [60.8 kB]
+13:46:23 | DEBUG | #7 3.714 Get:11 http://deb.debian.org/debian-security bookworm-security/main amd64 libnghttp2-14 amd64 1.52.0-1+deb12u3 [72.4 kB]
+13:46:23 | DEBUG | #7 3.712 Get:9 http://deb.debian.org/debian bookworm/main amd64 libsasl2-2 amd64 2.1.28+dfsg-10 [59.7 kB]
+13:46:23 | DEBUG | #7 3.713 Get:10 http://deb.debian.org/debian bookworm/main amd64 libldap-2.5-0 amd64 2.5.13+dfsg-5 [183 kB]
+13:46:23 | DEBUG | #7 3.715 Get:12 http://deb.debian.org/debian bookworm/main amd64 libpsl5 amd64 0.21.2-1 [58.7 kB]
+13:46:23 | DEBUG | #7 3.928 Selecting previously unselected package libbrotli1:amd64.
+13:46:23 | DEBUG | #7 3.911 Fetched 4242 kB in 0s (11.8 MB/s)
+13:46:23 | DEBUG | #7 3.928 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6096 files and directories currently installed.)
+13:46:23 | DEBUG | #7 3.933 Preparing to unpack .../00-libbrotli1_1.0.9-2+b6_amd64.deb ...
+13:46:23 | DEBUG | #7 3.981 Selecting previously unselected package libkrb5support0:amd64.
+13:46:23 | DEBUG | #7 3.938 Unpacking libbrotli1:amd64 (1.0.9-2+b6) ...
+13:46:23 | DEBUG | #7 3.984 Unpacking libkrb5support0:amd64 (1.20.1-2+deb12u5) ...
+13:46:23 | DEBUG | #7 4.043 Unpacking libkeyutils1:amd64 (1.6.3-2) ...
+13:46:23 | DEBUG | #7 3.982 Preparing to unpack .../01-libkrb5support0_1.20.1-2+deb12u5_amd64.deb ...
+13:46:23 | DEBUG | #7 4.011 Unpacking libk5crypto3:amd64 (1.20.1-2+deb12u5) ...
+13:46:23 | DEBUG | #7 4.040 Selecting previously unselected package libkeyutils1:amd64.
+13:46:23 | DEBUG | #7 4.071 Unpacking libssl3:amd64 (3.0.20-1~deb12u2) ...
+13:46:23 | DEBUG | #7 4.069 Preparing to unpack .../04-libssl3_3.0.20-1~deb12u2_amd64.deb ...
+13:46:23 | DEBUG | #7 4.008 Selecting previously unselected package libk5crypto3:amd64.
+13:46:23 | DEBUG | #7 4.041 Preparing to unpack .../03-libkeyutils1_1.6.3-2_amd64.deb ...
+13:46:23 | DEBUG | #7 4.009 Preparing to unpack .../02-libk5crypto3_1.20.1-2+deb12u5_amd64.deb ...
+13:46:23 | DEBUG | #7 4.068 Selecting previously unselected package libssl3:amd64.
+13:46:23 | DEBUG | #7 4.224 Selecting previously unselected package libkrb5-3:amd64.
+13:46:23 | DEBUG | #7 4.313 Selecting previously unselected package libsasl2-modules-db:amd64.
+13:46:23 | DEBUG | #7 4.227 Unpacking libkrb5-3:amd64 (1.20.1-2+deb12u5) ...
+13:46:23 | DEBUG | #7 4.225 Preparing to unpack .../05-libkrb5-3_1.20.1-2+deb12u5_amd64.deb ...
+13:46:23 | DEBUG | #7 4.282 Preparing to unpack .../06-libgssapi-krb5-2_1.20.1-2+deb12u5_amd64.deb ...
+13:46:23 | DEBUG | #7 4.284 Unpacking libgssapi-krb5-2:amd64 (1.20.1-2+deb12u5) ...
+13:46:23 | DEBUG | #7 4.317 Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg-10) ...
+13:46:23 | DEBUG | #7 4.281 Selecting previously unselected package libgssapi-krb5-2:amd64.
+13:46:23 | DEBUG | #7 4.336 Selecting previously unselected package libsasl2-2:amd64.
+13:46:23 | DEBUG | #7 4.315 Preparing to unpack .../07-libsasl2-modules-db_2.1.28+dfsg-10_amd64.deb ...
+13:46:23 | DEBUG | #7 4.407 Selecting previously unselected package libnghttp2-14:amd64.
+13:46:23 | DEBUG | #7 4.409 Unpacking libnghttp2-14:amd64 (1.52.0-1+deb12u3) ...
+13:46:23 | DEBUG | #7 4.364 Selecting previously unselected package libldap-2.5-0:amd64.
+13:46:23 | DEBUG | #7 4.436 Selecting previously unselected package libpsl5:amd64.
+13:46:23 | DEBUG | #7 4.338 Preparing to unpack .../08-libsasl2-2_2.1.28+dfsg-10_amd64.deb ...
+13:46:23 | DEBUG | #7 4.408 Preparing to unpack .../10-libnghttp2-14_1.52.0-1+deb12u3_amd64.deb ...
+13:46:23 | DEBUG | #7 4.367 Unpacking libldap-2.5-0:amd64 (2.5.13+dfsg-5) ...
+13:46:23 | DEBUG | #7 4.340 Unpacking libsasl2-2:amd64 (2.1.28+dfsg-10) ...
+13:46:23 | DEBUG | #7 4.437 Preparing to unpack .../11-libpsl5_0.21.2-1_amd64.deb ...
+13:46:23 | DEBUG | #7 4.365 Preparing to unpack .../09-libldap-2.5-0_2.5.13+dfsg-5_amd64.deb ...
+13:46:24 | DEBUG | #7 4.497 Preparing to unpack .../13-libssh2-1_1.10.0-3+b1_amd64.deb ...
+13:46:24 | DEBUG | #7 4.537 Unpacking libcurl4:amd64 (7.88.1-10+deb12u14) ...
+13:46:24 | DEBUG | #7 4.496 Selecting previously unselected package libssh2-1:amd64.
+13:46:24 | DEBUG | #7 4.583 Selecting previously unselected package curl.
+13:46:24 | DEBUG | #7 4.468 Preparing to unpack .../12-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb ...
+13:46:24 | DEBUG | #7 4.472 Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+13:46:24 | DEBUG | #7 4.466 Selecting previously unselected package librtmp1:amd64.
+13:46:24 | DEBUG | #7 4.439 Unpacking libpsl5:amd64 (0.21.2-1) ...
+13:46:24 | DEBUG | #7 4.499 Unpacking libssh2-1:amd64 (1.10.0-3+b1) ...
+13:46:24 | DEBUG | #7 4.534 Preparing to unpack .../14-libcurl4_7.88.1-10+deb12u14_amd64.deb ...
+13:46:24 | DEBUG | #7 4.533 Selecting previously unselected package libcurl4:amd64.
+13:46:24 | DEBUG | #7 4.654 Setting up libnghttp2-14:amd64 (1.52.0-1+deb12u3) ...
+13:46:24 | DEBUG | #7 4.681 Setting up libsasl2-2:amd64 (2.1.28+dfsg-10) ...
+13:46:24 | DEBUG | #7 4.644 Setting up libbrotli1:amd64 (1.0.9-2+b6) ...
+13:46:24 | DEBUG | #7 4.676 Setting up libk5crypto3:amd64 (1.20.1-2+deb12u5) ...
+13:46:24 | DEBUG | #7 4.637 Setting up libpsl5:amd64 (0.21.2-1) ...
+13:46:24 | DEBUG | #7 4.671 Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+13:46:24 | DEBUG | #7 4.586 Unpacking curl (7.88.1-10+deb12u14) ...
+13:46:24 | DEBUG | #7 4.584 Preparing to unpack .../15-curl_7.88.1-10+deb12u14_amd64.deb ...
+13:46:24 | DEBUG | #7 4.665 Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg-10) ...
+13:46:24 | DEBUG | #7 4.686 Setting up libssh2-1:amd64 (1.10.0-3+b1) ...
+13:46:24 | DEBUG | #7 4.660 Setting up libkrb5support0:amd64 (1.20.1-2+deb12u5) ...
+13:46:24 | DEBUG | #7 4.649 Setting up libssl3:amd64 (3.0.20-1~deb12u2) ...
+13:46:24 | DEBUG | #7 4.631 Setting up libkeyutils1:amd64 (1.6.3-2) ...
+13:46:24 | DEBUG | #7 4.706 Setting up libcurl4:amd64 (7.88.1-10+deb12u14) ...
+13:46:24 | DEBUG | #7 4.691 Setting up libkrb5-3:amd64 (1.20.1-2+deb12u5) ...
+13:46:24 | DEBUG | #7 4.695 Setting up libldap-2.5-0:amd64 (2.5.13+dfsg-5) ...
+13:46:24 | DEBUG | #7 4.715 Processing triggers for libc-bin (2.36-9+deb12u14) ...
+13:46:24 | DEBUG | #7 4.700 Setting up libgssapi-krb5-2:amd64 (1.20.1-2+deb12u5) ...
+13:46:24 | DEBUG | #7 4.710 Setting up curl (7.88.1-10+deb12u14) ...
+13:46:24 | DEBUG | #7 DONE 4.9s
+13:46:24 | DEBUG | #8 [ 4/11] RUN npm install -g pm2
+13:46:24 | DEBUG | 
+13:46:27 | DEBUG | #8 3.161 
+13:46:27 | DEBUG | #8 3.161 
+13:46:27 | DEBUG | #8 3.161 added 90 packages in 3s
+13:46:27 | DEBUG | #8 3.162 8 packages are looking for funding
+13:46:27 | DEBUG | #8 3.162   run `npm fund` for details
+13:46:27 | DEBUG | #8 DONE 3.4s
+13:46:27 | DEBUG | 
+13:46:27 | DEBUG | #9 DONE 0.1s
+13:46:27 | DEBUG | #9 [ 5/11] RUN groupadd --gid 2000 app && useradd --uid 2000 --gid 2000 -m -s /bin/bash app
+13:46:28 | DEBUG | #12 0.043 Detected pnpm workspace
+13:46:28 | DEBUG | 
+13:46:28 | DEBUG | #11 DONE 0.1s
+13:46:28 | DEBUG | 
+13:46:28 | DEBUG | #11 [ 7/11] COPY package.json pnpm-lock.yaml* package-lock.json* pnpm-workspace.yaml* ./
+13:46:28 | DEBUG | #12 [ 8/11] RUN if [ -f pnpm-lock.yaml ]; then       echo "Detected pnpm workspace";       corepack prepare pnpm --activate && pnpm install --frozen-lockfile;     elif [ -f package-lock.json ]; then       echo "Detected npm project";       npm ci;     else       echo "No lockfile, fallback to basic install";       npm install;     fi
+13:46:28 | DEBUG | #10 [ 6/11] WORKDIR /app
+13:46:28 | DEBUG | #10 DONE 0.0s
+13:46:28 | DEBUG | 
+13:46:28 | DEBUG | #12 0.444 Preparing pnpm@* for immediate activation...
+13:46:29 | DEBUG | #12 1.645 [WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+13:46:29 | DEBUG | #12 1.755 ? Verifying lockfile against supply-chain policies (499 entries)...
+13:46:33 | DEBUG | #12 5.846 ✓ Lockfile passes supply-chain policies (499 entries in 4s)
+13:46:34 | DEBUG | #12 5.851 Lockfile is up to date, resolution step is skipped
+13:46:34 | DEBUG | #12 5.887 Packages: +2
+13:46:34 | DEBUG | #12 5.883 Progress: resolved 1, reused 0, downloaded 0, added 0
+13:46:34 | DEBUG | #12 5.887 ++
+13:46:34 | DEBUG | #12 6.241 Progress: resolved 2, reused 0, downloaded 2, added 2, done
+13:46:34 | DEBUG | #12 6.269 + typescript 5.9.3
+13:46:34 | DEBUG | #12 6.269 
+13:46:34 | DEBUG | #12 6.269 + prettier 3.8.3
+13:46:34 | DEBUG | #12 6.269 devDependencies:
+13:46:34 | DEBUG | #12 6.273 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:46:34 | DEBUG | #12 6.317 Done in 5.3s using pnpm v11.5.3
+13:46:34 | DEBUG | #12 6.293 . preinstall: Done
+13:46:34 | DEBUG | #12 6.269 
+13:46:34 | DEBUG | #12 DONE 6.6s
+13:46:34 | DEBUG | 
+13:46:34 | DEBUG | #13 DONE 0.0s
+13:46:34 | DEBUG | #14 DONE 0.1s
+13:46:34 | DEBUG | #14 [10/11] COPY --chown=app:app . .
+13:46:34 | DEBUG | #13 [ 9/11] WORKDIR /app
+13:46:34 | DEBUG | #15 [11/11] RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build
+13:46:34 | DEBUG | 
+13:46:34 | DEBUG | 
+13:46:35 | DEBUG | #15 0.495 [WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+13:46:35 | DEBUG | #15 0.524 Scope: all 8 workspace projects
+13:46:35 | DEBUG | #15 0.596 Lockfile is up to date, resolution step is skipped
+13:46:35 | DEBUG | #15 0.668 Packages: +492
+13:46:35 | DEBUG | #15 0.668 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+13:46:35 | DEBUG | #15 0.624 Progress: resolved 1, reused 0, downloaded 0, added 0
+13:46:36 | DEBUG | #15 1.625 Progress: resolved 492, reused 0, downloaded 300, added 299
+13:46:37 | DEBUG | #15 2.627 Progress: resolved 492, reused 0, downloaded 491, added 491
+13:46:37 | DEBUG | #15 2.917 Progress: resolved 492, reused 0, downloaded 492, added 492, done
+13:46:37 | DEBUG | #15 3.203 
+13:46:38 | DEBUG | #15 3.214 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:46:38 | DEBUG | #15 3.351 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+13:46:38 | DEBUG | #15 3.351 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+13:46:38 | DEBUG | #15 3.351 
+13:46:38 | DEBUG | #15 3.263 . preinstall: Done
+13:46:39 | DEBUG | #15 ERROR: process "/bin/sh -c pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1
+13:46:39 | DEBUG | 3.351 
+13:46:39 | DEBUG | 3.203 
+13:46:39 | DEBUG | 3.214 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:46:39 | DEBUG | 0.668 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+13:46:39 | DEBUG |  > [11/11] RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build:
+13:46:39 | DEBUG | ------
+13:46:39 | DEBUG | 2.917 Progress: resolved 492, reused 0, downloaded 492, added 492, done
+13:46:39 | DEBUG | 3.263 . preinstall: Done
+13:46:39 | DEBUG | 3.351 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+13:46:39 | DEBUG | ------
+13:46:39 | DEBUG | 3.351 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+13:46:39 | DEBUG | 1.625 Progress: resolved 492, reused 0, downloaded 300, added 299
+13:46:39 | DEBUG | 2.627 Progress: resolved 492, reused 0, downloaded 491, added 491
+13:46:39 | DEBUG | --------------------
+13:46:39 | DEBUG |   69 |     
+13:46:39 | DEBUG | Dockerfile:68
+13:46:39 | DEBUG |   70 |     
+13:46:39 | DEBUG |   68 | >>> RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build
+13:46:39 | DEBUG |   66 |     # Run build command if provided
+13:46:39 | DEBUG |   67 |     
+13:46:39 | DEBUG | --------------------
+13:46:39 | INFO | Build failed
+13:46:39 | INFO | error: failed to solve: process "/bin/sh -c pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1
+13:46:54 | DEBUG | #3 [internal] load .dockerignore
+13:46:54 | DEBUG | #1 [internal] load build definition from Dockerfile
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | #3 transferring context: 141B done
+13:46:54 | DEBUG | #2 DONE 0.3s
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | #2 [internal] load metadata for docker.io/library/node:24-slim
+13:46:54 | DEBUG | #6 DONE 0.6s
+13:46:54 | DEBUG | #1 transferring dockerfile: 1.64kB 0.0s done
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | #1 WARN: Empty continuation line found in: RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends     curl     && rm -rf /var/lib/apt/lists/*
+13:46:54 | DEBUG | #5 transferring context: 9.66MB 0.2s done
+13:46:54 | DEBUG | #5 [internal] load build context
+13:46:54 | DEBUG | #4 CACHED
+13:46:54 | DEBUG | #1 DONE 0.0s
+13:46:54 | DEBUG | #5 DONE 0.2s
+13:46:54 | DEBUG | #3 DONE 0.0s
+13:46:54 | INFO | Build started
+13:46:54 | DEBUG | #4 [ 1/11] FROM docker.io/library/node:24-slim@sha256:2c87ef9bd3c6a3bd4b472b4bec2ce9d16354b0c574f736c476489d09f560a203
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | #6 [ 2/11] RUN corepack enable
+13:46:54 | DEBUG | #4 resolve docker.io/library/node:24-slim@sha256:2c87ef9bd3c6a3bd4b472b4bec2ce9d16354b0c574f736c476489d09f560a203 0.0s done
+13:46:54 | DEBUG | do so (now or later) by using -c with the switch command. Example:
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG |   git switch -c <new-branch-name>
+13:46:54 | DEBUG | If you want to create a new branch to retain commits you create, you may
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | You are in 'detached HEAD' state. You can look around, make experimental
+13:46:54 | DEBUG |   git switch -
+13:46:54 | DEBUG | HEAD is now at 0019213 Add pnpm build configuration to package.json
+13:46:54 | DEBUG | state without impacting any branches by switching back to a branch.
+13:46:54 | DEBUG | Or undo this operation with:
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | Turn off this advice by setting config variable advice.detachedHead to false
+13:46:54 | DEBUG | Note: switching to '0019213e4fe08ed11b94e05940016df11131ee97'.
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | Cloning into '/workspace'...
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | changes and commit them, and you can discard any commits you make in this
+13:46:54 | DEBUG | 
+13:46:54 | DEBUG | #7 [ 3/11] RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends     curl     && rm -rf /var/lib/apt/lists/*
+13:46:54 | DEBUG | #7 0.167 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+13:46:54 | DEBUG | #7 0.269 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+13:46:54 | DEBUG | #7 0.322 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+13:46:54 | DEBUG | #7 0.408 Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+13:46:55 | DEBUG | #7 1.117 Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+13:46:55 | DEBUG | #7 1.118 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [310 kB]
+13:46:56 | DEBUG | #7 2.185 Fetched 9362 kB in 2s (4464 kB/s)
+13:46:56 | DEBUG | #7 2.185 Reading package lists...
+13:46:57 | DEBUG | #7 2.864 Reading package lists...
+13:46:57 | DEBUG | #7 3.731 Reading state information...
+13:46:57 | DEBUG | #7 3.554 Building dependency tree...
+13:46:58 | DEBUG | #7 3.920 The following additional packages will be installed:
+13:46:58 | DEBUG | #7 3.923   ca-certificates krb5-locales libldap-common publicsuffix libsasl2-modules
+13:46:58 | DEBUG | #7 4.015   curl libbrotli1 libcurl4 libgssapi-krb5-2 libk5crypto3 libkeyutils1
+13:46:58 | DEBUG | #7 4.111 Need to get 4242 kB of archives.
+13:46:58 | DEBUG | #7 3.923 Recommended packages:
+13:46:58 | DEBUG | #7 3.923   krb5-doc krb5-user
+13:46:58 | DEBUG | #7 3.921   libsasl2-modules-db libssh2-1 libssl3
+13:46:58 | DEBUG | #7 4.015 The following NEW packages will be installed:
+13:46:58 | DEBUG | #7 4.016   libkrb5-3 libkrb5support0 libldap-2.5-0 libnghttp2-14 libpsl5 librtmp1
+13:46:58 | DEBUG | #7 4.016   libsasl2-2 libsasl2-modules-db libssh2-1 libssl3
+13:46:58 | DEBUG | #7 3.923 Suggested packages:
+13:46:58 | DEBUG | #7 3.920   libbrotli1 libcurl4 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3
+13:46:58 | DEBUG | #7 4.111 0 upgraded, 16 newly installed, 0 to remove and 0 not upgraded.
+13:46:58 | DEBUG | #7 3.921   libkrb5support0 libldap-2.5-0 libnghttp2-14 libpsl5 librtmp1 libsasl2-2
+13:46:58 | DEBUG | #7 4.111 Get:1 http://deb.debian.org/debian bookworm/main amd64 libbrotli1 amd64 1.0.9-2+b6 [275 kB]
+13:46:58 | DEBUG | #7 4.111 After this operation, 12.0 MB of additional disk space will be used.
+13:46:58 | DEBUG | #7 4.241 Get:2 http://deb.debian.org/debian-security bookworm-security/main amd64 libkrb5support0 amd64 1.20.1-2+deb12u5 [33.2 kB]
+13:46:58 | DEBUG | #7 4.247 Get:4 http://deb.debian.org/debian bookworm/main amd64 libkeyutils1 amd64 1.6.3-2 [8808 B]
+13:46:58 | DEBUG | #7 4.338 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 libkrb5-3 amd64 1.20.1-2+deb12u5 [332 kB]
+13:46:58 | DEBUG | #7 4.346 Get:7 http://deb.debian.org/debian-security bookworm-security/main amd64 libgssapi-krb5-2 amd64 1.20.1-2+deb12u5 [135 kB]
+13:46:58 | DEBUG | #7 4.243 Get:3 http://deb.debian.org/debian-security bookworm-security/main amd64 libk5crypto3 amd64 1.20.1-2+deb12u5 [79.7 kB]
+13:46:58 | DEBUG | #7 4.247 Get:5 http://deb.debian.org/debian-security bookworm-security/main amd64 libssl3 amd64 3.0.20-1~deb12u2 [2036 kB]
+13:46:58 | DEBUG | #7 4.349 Get:11 http://deb.debian.org/debian-security bookworm-security/main amd64 libnghttp2-14 amd64 1.52.0-1+deb12u3 [72.4 kB]
+13:46:58 | DEBUG | #7 4.347 Get:8 http://deb.debian.org/debian bookworm/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg-10 [20.3 kB]
+13:46:58 | DEBUG | #7 4.348 Get:10 http://deb.debian.org/debian bookworm/main amd64 libldap-2.5-0 amd64 2.5.13+dfsg-5 [183 kB]
+13:46:58 | DEBUG | #7 4.350 Get:13 http://deb.debian.org/debian bookworm/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2+b2 [60.8 kB]
+13:46:58 | DEBUG | #7 4.359 Get:14 http://deb.debian.org/debian bookworm/main amd64 libssh2-1 amd64 1.10.0-3+b1 [179 kB]
+13:46:58 | DEBUG | #7 4.347 Get:9 http://deb.debian.org/debian bookworm/main amd64 libsasl2-2 amd64 2.1.28+dfsg-10 [59.7 kB]
+13:46:58 | DEBUG | #7 4.408 Get:16 http://deb.debian.org/debian bookworm/main amd64 curl amd64 7.88.1-10+deb12u14 [316 kB]
+13:46:58 | DEBUG | #7 4.372 Get:15 http://deb.debian.org/debian bookworm/main amd64 libcurl4 amd64 7.88.1-10+deb12u14 [392 kB]
+13:46:58 | DEBUG | #7 4.349 Get:12 http://deb.debian.org/debian bookworm/main amd64 libpsl5 amd64 0.21.2-1 [58.7 kB]
+13:46:58 | DEBUG | #7 4.597 debconf: delaying package configuration, since apt-utils is not installed
+13:46:58 | DEBUG | #7 4.659 Selecting previously unselected package libbrotli1:amd64.
+13:46:58 | DEBUG | #7 4.659 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6096 files and directories currently installed.)
+13:46:58 | DEBUG | #7 4.670 Preparing to unpack .../00-libbrotli1_1.0.9-2+b6_amd64.deb ...
+13:46:58 | DEBUG | #7 4.736 Selecting previously unselected package libkrb5support0:amd64.
+13:46:58 | DEBUG | #7 4.675 Unpacking libbrotli1:amd64 (1.0.9-2+b6) ...
+13:46:58 | DEBUG | #7 4.634 Fetched 4242 kB in 0s (11.2 MB/s)
+13:46:58 | DEBUG | #7 4.740 Unpacking libkrb5support0:amd64 (1.20.1-2+deb12u5) ...
+13:46:58 | DEBUG | #7 4.737 Preparing to unpack .../01-libkrb5support0_1.20.1-2+deb12u5_amd64.deb ...
+13:46:58 | DEBUG | #7 4.809 Unpacking libk5crypto3:amd64 (1.20.1-2+deb12u5) ...
+13:46:58 | DEBUG | #7 4.789 Preparing to unpack .../02-libk5crypto3_1.20.1-2+deb12u5_amd64.deb ...
+13:46:58 | DEBUG | #7 4.846 Selecting previously unselected package libkeyutils1:amd64.
+13:46:58 | DEBUG | #7 4.788 Selecting previously unselected package libk5crypto3:amd64.
+13:46:59 | DEBUG | #7 4.891 Preparing to unpack .../04-libssl3_3.0.20-1~deb12u2_amd64.deb ...
+13:46:59 | DEBUG | #7 4.894 Unpacking libssl3:amd64 (3.0.20-1~deb12u2) ...
+13:46:59 | DEBUG | #7 4.890 Selecting previously unselected package libssl3:amd64.
+13:46:59 | DEBUG | #7 4.850 Unpacking libkeyutils1:amd64 (1.6.3-2) ...
+13:46:59 | DEBUG | #7 4.847 Preparing to unpack .../03-libkeyutils1_1.6.3-2_amd64.deb ...
+13:46:59 | DEBUG | #7 5.069 Selecting previously unselected package libkrb5-3:amd64.
+13:46:59 | DEBUG | #7 5.077 Unpacking libkrb5-3:amd64 (1.20.1-2+deb12u5) ...
+13:46:59 | DEBUG | #7 5.070 Preparing to unpack .../05-libkrb5-3_1.20.1-2+deb12u5_amd64.deb ...
+13:46:59 | DEBUG | #7 5.203 Selecting previously unselected package libsasl2-modules-db:amd64.
+13:46:59 | DEBUG | #7 5.152 Selecting previously unselected package libgssapi-krb5-2:amd64.
+13:46:59 | DEBUG | #7 5.154 Preparing to unpack .../06-libgssapi-krb5-2_1.20.1-2+deb12u5_amd64.deb ...
+13:46:59 | DEBUG | #7 5.157 Unpacking libgssapi-krb5-2:amd64 (1.20.1-2+deb12u5) ...
+13:46:59 | DEBUG | #7 5.205 Preparing to unpack .../07-libsasl2-modules-db_2.1.28+dfsg-10_amd64.deb ...
+13:46:59 | DEBUG | #7 5.240 Preparing to unpack .../08-libsasl2-2_2.1.28+dfsg-10_amd64.deb ...
+13:46:59 | DEBUG | #7 5.302 Preparing to unpack .../09-libldap-2.5-0_2.5.13+dfsg-5_amd64.deb ...
+13:46:59 | DEBUG | #7 5.208 Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg-10) ...
+13:46:59 | DEBUG | #7 5.239 Selecting previously unselected package libsasl2-2:amd64.
+13:46:59 | DEBUG | #7 5.302 Selecting previously unselected package libldap-2.5-0:amd64.
+13:46:59 | DEBUG | #7 5.310 Unpacking libldap-2.5-0:amd64 (2.5.13+dfsg-5) ...
+13:46:59 | DEBUG | #7 5.243 Unpacking libsasl2-2:amd64 (2.1.28+dfsg-10) ...
+13:46:59 | DEBUG | #7 5.353 Selecting previously unselected package libnghttp2-14:amd64.
+13:46:59 | DEBUG | #7 5.440 Selecting previously unselected package librtmp1:amd64.
+13:46:59 | DEBUG | #7 5.359 Unpacking libnghttp2-14:amd64 (1.52.0-1+deb12u3) ...
+13:46:59 | DEBUG | #7 5.397 Selecting previously unselected package libpsl5:amd64.
+13:46:59 | DEBUG | #7 5.355 Preparing to unpack .../10-libnghttp2-14_1.52.0-1+deb12u3_amd64.deb ...
+13:46:59 | DEBUG | #7 5.399 Preparing to unpack .../11-libpsl5_0.21.2-1_amd64.deb ...
+13:46:59 | DEBUG | #7 5.402 Unpacking libpsl5:amd64 (0.21.2-1) ...
+13:46:59 | DEBUG | #7 5.495 Unpacking libssh2-1:amd64 (1.10.0-3+b1) ...
+13:46:59 | DEBUG | #7 5.492 Preparing to unpack .../13-libssh2-1_1.10.0-3+b1_amd64.deb ...
+13:46:59 | DEBUG | #7 5.444 Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+13:46:59 | DEBUG | #7 5.441 Preparing to unpack .../12-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb ...
+13:46:59 | DEBUG | #7 5.548 Selecting previously unselected package libcurl4:amd64.
+13:46:59 | DEBUG | #7 5.489 Selecting previously unselected package libssh2-1:amd64.
+13:46:59 | DEBUG | #7 5.609 Selecting previously unselected package curl.
+13:46:59 | DEBUG | #7 5.614 Unpacking curl (7.88.1-10+deb12u14) ...
+13:46:59 | DEBUG | #7 5.552 Unpacking libcurl4:amd64 (7.88.1-10+deb12u14) ...
+13:46:59 | DEBUG | #7 5.702 Setting up libkeyutils1:amd64 (1.6.3-2) ...
+13:46:59 | DEBUG | #7 5.549 Preparing to unpack .../14-libcurl4_7.88.1-10+deb12u14_amd64.deb ...
+13:46:59 | DEBUG | #7 5.610 Preparing to unpack .../15-curl_7.88.1-10+deb12u14_amd64.deb ...
+13:46:59 | DEBUG | #7 5.812 Setting up libssh2-1:amd64 (1.10.0-3+b1) ...
+13:46:59 | DEBUG | #7 5.791 Setting up libsasl2-2:amd64 (2.1.28+dfsg-10) ...
+13:46:59 | DEBUG | #7 5.748 Setting up libkrb5support0:amd64 (1.20.1-2+deb12u5) ...
+13:46:59 | DEBUG | #7 5.773 Setting up libk5crypto3:amd64 (1.20.1-2+deb12u5) ...
+13:46:59 | DEBUG | #7 5.765 Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+13:46:59 | DEBUG | #7 5.757 Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg-10) ...
+13:46:59 | DEBUG | #7 5.739 Setting up libnghttp2-14:amd64 (1.52.0-1+deb12u3) ...
+13:46:59 | DEBUG | #7 5.727 Setting up libssl3:amd64 (3.0.20-1~deb12u2) ...
+13:46:59 | DEBUG | #7 5.709 Setting up libpsl5:amd64 (0.21.2-1) ...
+13:46:59 | DEBUG | #7 5.719 Setting up libbrotli1:amd64 (1.0.9-2+b6) ...
+13:47:00 | DEBUG | #7 5.845 Setting up libkrb5-3:amd64 (1.20.1-2+deb12u5) ...
+13:47:00 | DEBUG | #7 5.845 Setting up libldap-2.5-0:amd64 (2.5.13+dfsg-5) ...
+13:47:00 | DEBUG | #7 5.867 Setting up libcurl4:amd64 (7.88.1-10+deb12u14) ...
+13:47:00 | DEBUG | #7 5.856 Setting up libgssapi-krb5-2:amd64 (1.20.1-2+deb12u5) ...
+13:47:00 | DEBUG | #7 5.877 Setting up curl (7.88.1-10+deb12u14) ...
+13:47:00 | DEBUG | #7 5.888 Processing triggers for libc-bin (2.36-9+deb12u14) ...
+13:47:00 | DEBUG | #7 DONE 6.1s
+13:47:00 | DEBUG | #8 [ 4/11] RUN npm install -g pm2
+13:47:00 | DEBUG | 
+13:47:05 | DEBUG | #8 5.219 added 90 packages in 5s
+13:47:05 | DEBUG | #8 5.219 8 packages are looking for funding
+13:47:05 | DEBUG | #8 5.219 
+13:47:05 | DEBUG | #8 5.219 
+13:47:05 | DEBUG | #8 5.219   run `npm fund` for details
+13:47:06 | DEBUG | #8 DONE 6.0s
+13:47:06 | DEBUG | 
+13:47:06 | DEBUG | #9 [ 5/11] RUN groupadd --gid 2000 app && useradd --uid 2000 --gid 2000 -m -s /bin/bash app
+13:47:06 | DEBUG | #9 DONE 0.3s
+13:47:06 | DEBUG | 
+13:47:06 | DEBUG | #11 [ 7/11] COPY package.json pnpm-lock.yaml* package-lock.json* pnpm-workspace.yaml* ./
+13:47:06 | DEBUG | #10 [ 6/11] WORKDIR /app
+13:47:06 | DEBUG | #11 DONE 0.1s
+13:47:06 | DEBUG | 
+13:47:06 | DEBUG | #10 DONE 0.1s
+13:47:06 | DEBUG | #12 [ 8/11] RUN if [ -f pnpm-lock.yaml ]; then       echo "Detected pnpm workspace";       corepack prepare pnpm --activate && pnpm install --frozen-lockfile;     elif [ -f package-lock.json ]; then       echo "Detected npm project";       npm ci;     else       echo "No lockfile, fallback to basic install";       npm install;     fi
+13:47:06 | DEBUG | 
+13:47:06 | DEBUG | #12 0.093 Detected pnpm workspace
+13:47:07 | DEBUG | #12 0.699 Preparing pnpm@* for immediate activation...
+13:47:09 | DEBUG | #12 2.515 [WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+13:47:09 | DEBUG | #12 2.641 ? Verifying lockfile against supply-chain policies (499 entries)...
+13:47:13 | DEBUG | #12 6.717 ✓ Lockfile passes supply-chain policies (499 entries in 4s)
+13:47:13 | DEBUG | #12 6.755 Packages: +2
+13:47:13 | DEBUG | #12 6.751 Progress: resolved 1, reused 0, downloaded 0, added 0
+13:47:13 | DEBUG | #12 6.722 Lockfile is up to date, resolution step is skipped
+13:47:13 | DEBUG | #12 6.755 ++
+13:47:13 | DEBUG | #12 7.132 Progress: resolved 2, reused 0, downloaded 2, added 2, done
+13:47:13 | DEBUG | #12 7.254 Done in 5.5s using pnpm v11.5.3
+13:47:13 | DEBUG | #12 7.184 
+13:47:13 | DEBUG | #12 7.184 devDependencies:
+13:47:13 | DEBUG | #12 7.184 + prettier 3.8.3
+13:47:13 | DEBUG | #12 7.189 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:47:13 | DEBUG | #12 7.184 
+13:47:13 | DEBUG | #12 7.217 . preinstall: Done
+13:47:13 | DEBUG | #12 7.184 + typescript 5.9.3
+13:47:15 | DEBUG | #12 DONE 8.4s
+13:47:15 | DEBUG | #13 [ 9/11] WORKDIR /app
+13:47:15 | DEBUG | #13 DONE 0.1s
+13:47:15 | DEBUG | 
+13:47:15 | DEBUG | #14 [10/11] COPY --chown=app:app . .
+13:47:15 | DEBUG | 
+13:47:15 | DEBUG | #14 DONE 0.2s
+13:47:15 | DEBUG | 
+13:47:15 | DEBUG | #15 [11/11] RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build
+13:47:16 | DEBUG | #15 0.747 [WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+13:47:16 | DEBUG | #15 0.786 Scope: all 8 workspace projects
+13:47:16 | DEBUG | #15 0.893 Lockfile is up to date, resolution step is skipped
+13:47:16 | DEBUG | #15 0.942 Progress: resolved 1, reused 0, downloaded 0, added 0
+13:47:16 | DEBUG | #15 1.227 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+13:47:16 | DEBUG | #15 1.227 Packages: +492
+13:47:17 | DEBUG | #15 1.948 Progress: resolved 492, reused 0, downloaded 115, added 114
+13:47:18 | DEBUG | #15 2.949 Progress: resolved 492, reused 0, downloaded 401, added 374
+13:47:19 | DEBUG | #15 3.620 Progress: resolved 492, reused 0, downloaded 492, added 492, done
+13:47:19 | DEBUG | #15 4.125 
+13:47:19 | DEBUG | #15 4.141 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:47:19 | DEBUG | #15 4.320 
+13:47:19 | DEBUG | #15 4.320 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+13:47:19 | DEBUG | #15 4.189 . preinstall: Done
+13:47:19 | DEBUG | #15 4.320 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+13:47:24 | DEBUG | #15 ERROR: process "/bin/sh -c pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1
+13:47:24 | DEBUG | ------
+13:47:24 | DEBUG | 4.320 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+13:47:24 | DEBUG | ------
+13:47:24 | DEBUG | 4.141 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:47:24 | DEBUG | 3.620 Progress: resolved 492, reused 0, downloaded 492, added 492, done
+13:47:24 | DEBUG |  > [11/11] RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build:
+13:47:24 | DEBUG | 2.949 Progress: resolved 492, reused 0, downloaded 401, added 374
+13:47:24 | DEBUG | 1.948 Progress: resolved 492, reused 0, downloaded 115, added 114
+13:47:24 | DEBUG | 4.320 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+13:47:24 | DEBUG | 4.125 
+13:47:24 | DEBUG | 4.189 . preinstall: Done
+13:47:24 | DEBUG | 1.227 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+13:47:24 | DEBUG | 4.320 
+13:47:24 | DEBUG |   66 |     # Run build command if provided
+13:47:24 | DEBUG | --------------------
+13:47:24 | DEBUG | --------------------
+13:47:24 | DEBUG | Dockerfile:68
+13:47:24 | INFO | error: failed to solve: process "/bin/sh -c pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1
+13:47:24 | DEBUG |   67 |     
+13:47:24 | DEBUG |   68 | >>> RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build
+13:47:24 | DEBUG |   69 |     
+13:47:24 | DEBUG |   70 |     
+13:47:24 | INFO | Build failed
+13:47:49 | DEBUG | #15 1.123 Packages: +492
+13:47:49 | DEBUG | #8 [ 4/11] RUN npm install -g pm2
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #1 WARN: Empty continuation line found in: RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends     curl     && rm -rf /var/lib/apt/lists/*
+13:47:49 | DEBUG | #15 0.892 Progress: resolved 1, reused 0, downloaded 0, added 0
+13:47:49 | DEBUG | #15 0.747 Scope: all 8 workspace projects
+13:47:49 | DEBUG | #4 [ 1/11] FROM docker.io/library/node:24-slim@sha256:2c87ef9bd3c6a3bd4b472b4bec2ce9d16354b0c574f736c476489d09f560a203
+13:47:49 | DEBUG | #7 [ 9/11] WORKDIR /app
+13:47:49 | DEBUG | #9 CACHED
+13:47:49 | DEBUG | #14 CACHED
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #9 [ 6/11] WORKDIR /app
+13:47:49 | INFO | Build started
+13:47:49 | DEBUG | #5 transferring context: 9.66MB 0.1s done
+13:47:49 | DEBUG | #2 [internal] load metadata for docker.io/library/node:24-slim
+13:47:49 | DEBUG | #6 CACHED
+13:47:49 | DEBUG | #5 [internal] load build context
+13:47:49 | DEBUG | #6 [ 7/11] COPY package.json pnpm-lock.yaml* package-lock.json* pnpm-workspace.yaml* ./
+13:47:49 | DEBUG | #15 0.698 [WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+13:47:49 | DEBUG | #15 0.854 Lockfile is up to date, resolution step is skipped
+13:47:49 | DEBUG | #1 transferring dockerfile: 1.64kB done
+13:47:49 | DEBUG | #11 [ 2/11] RUN corepack enable
+13:47:49 | DEBUG | #1 DONE 0.0s
+13:47:49 | DEBUG | #12 [ 3/11] RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends     curl     && rm -rf /var/lib/apt/lists/*
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #1 [internal] load build definition from Dockerfile
+13:47:49 | DEBUG | #10 [ 8/11] RUN if [ -f pnpm-lock.yaml ]; then       echo "Detected pnpm workspace";       corepack prepare pnpm --activate && pnpm install --frozen-lockfile;     elif [ -f package-lock.json ]; then       echo "Detected npm project";       npm ci;     else       echo "No lockfile, fallback to basic install";       npm install;     fi
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #2 DONE 0.4s
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #7 CACHED
+13:47:49 | DEBUG | #4 resolve docker.io/library/node:24-slim@sha256:2c87ef9bd3c6a3bd4b472b4bec2ce9d16354b0c574f736c476489d09f560a203 0.0s done
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #15 [11/11] RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #14 [10/11] COPY --chown=app:app . .
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #15 1.123 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+13:47:49 | DEBUG | #13 [ 5/11] RUN groupadd --gid 2000 app && useradd --uid 2000 --gid 2000 -m -s /bin/bash app
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #3 [internal] load .dockerignore
+13:47:49 | DEBUG | #12 CACHED
+13:47:49 | DEBUG | #8 CACHED
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #3 DONE 0.0s
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #5 DONE 0.1s
+13:47:49 | DEBUG | #3 transferring context: 141B done
+13:47:49 | DEBUG | #10 CACHED
+13:47:49 | DEBUG | #4 DONE 0.0s
+13:47:49 | DEBUG | #13 CACHED
+13:47:49 | DEBUG | #11 CACHED
+13:47:49 | DEBUG | Turn off this advice by setting config variable advice.detachedHead to false
+13:47:49 | DEBUG | HEAD is now at 0019213 Add pnpm build configuration to package.json
+13:47:49 | DEBUG | Note: switching to '0019213e4fe08ed11b94e05940016df11131ee97'.
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | do so (now or later) by using -c with the switch command. Example:
+13:47:49 | DEBUG |   git switch -c <new-branch-name>
+13:47:49 | DEBUG | changes and commit them, and you can discard any commits you make in this
+13:47:49 | DEBUG | state without impacting any branches by switching back to a branch.
+13:47:49 | DEBUG | Cloning into '/workspace'...
+13:47:49 | DEBUG | You are in 'detached HEAD' state. You can look around, make experimental
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | Or undo this operation with:
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG |   git switch -
+13:47:49 | DEBUG | If you want to create a new branch to retain commits you create, you may
+13:47:49 | DEBUG | 
+13:47:49 | DEBUG | #15 1.895 Progress: resolved 492, reused 0, downloaded 161, added 156
+13:47:50 | DEBUG | #15 2.895 Progress: resolved 492, reused 0, downloaded 480, added 478
+13:47:51 | DEBUG | #15 3.339 Progress: resolved 492, reused 0, downloaded 492, added 492, done
+13:47:51 | DEBUG | #15 3.806 
+13:47:51 | DEBUG | #15 4.023 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+13:47:51 | DEBUG | #15 3.821 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:47:51 | DEBUG | #15 4.023 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+13:47:51 | DEBUG | #15 3.888 . preinstall: Done
+13:47:51 | DEBUG | #15 4.023 
+13:47:55 | DEBUG | #15 ERROR: process "/bin/sh -c pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1
+13:47:55 | DEBUG | ------
+13:47:55 | DEBUG | 1.895 Progress: resolved 492, reused 0, downloaded 161, added 156
+13:47:55 | DEBUG |  > [11/11] RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build:
+13:47:55 | DEBUG | 4.023 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+13:47:55 | DEBUG | 2.895 Progress: resolved 492, reused 0, downloaded 480, added 478
+13:47:55 | DEBUG | 4.023 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+13:47:55 | DEBUG | 3.888 . preinstall: Done
+13:47:55 | DEBUG | 3.806 
+13:47:55 | DEBUG | 4.023 
+13:47:55 | DEBUG | 1.123 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+13:47:55 | DEBUG | ------
+13:47:55 | DEBUG | 3.339 Progress: resolved 492, reused 0, downloaded 492, added 492, done
+13:47:55 | DEBUG | 3.821 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+13:47:55 | INFO | error: failed to solve: process "/bin/sh -c pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1
+13:47:55 | DEBUG |   69 |     
+13:47:55 | DEBUG |   70 |     
+13:47:55 | DEBUG | --------------------
+13:47:55 | DEBUG |   68 | >>> RUN pnpm install --frozen-lockfile && pnpm run typecheck:libs && pnpm --filter @workspace/lascarpetta run build && pnpm --filter @workspace/api-server run build
+13:47:55 | DEBUG |   66 |     # Run build command if provided
+13:47:55 | DEBUG |   67 |     
+13:47:55 | DEBUG | Dockerfile:68
+13:47:55 | DEBUG | --------------------
+13:47:55 | INFO | Build failed
